@@ -553,41 +553,26 @@ body {
                     <li><span id="toggle-passes" class="toggle-passes">show failures only</span></li>
                 </ul>
                 <ul class="mocha-stats">
-                    <li class="passes">passes: <em>1</em></li>
+                    <li class="passes">passes: <em>2</em></li>
                     <li class="pending">pending: <em>0</em></li>
                     <li class="failures">failures: <em>0</em></li>
-                    <li class="duration">duration: <em>9s</em></li>
+                    <li class="duration">duration: <em>9.6s</em></li>
                 </ul>
             </div>
-            <ul id="report"><li class="suite"><h1>Login &#x26; Sort</h1><ul><li class="test pass slow"><h2>Sukses Login<span class="duration">9032ms</span></h2><pre><code>async function(){
-        driver = await new Builder().forBrowser(&#x27;chrome&#x27;).build();
-        await driver.get(&#x27;http://www.saucedemo.com&#x27;);
-        const title = await driver.getTitle();
-        
-        //assert: memastikan object sama persis
-        assert.strictEqual(title, &#x27;Swag Labs&#x27;);
-        
-        //input
-        let inputUsername = await driver.findElement(By.xpath(&#x27;//*[@id=&#x22;user-name&#x22;]&#x27;))
-        let inputPassword = await driver.findElement(By.xpath(&#x27;//*[@id=&#x22;password&#x22;]&#x27;))
-        let buttonLogin = await driver.findElement(By.xpath(&#x27;//*[@id=&#x22;login-button&#x22;]&#x27;))
-        await inputUsername.sendKeys(&#x27;standard_user&#x27;)
-        await inputPassword.sendKeys(&#x27;secret_sauce&#x27;)
-        await buttonLogin.click()
-        //assert: text dalam element benar
-        let textAppLogo = await driver.findElement(By.className(&#x27;app_logo&#x27;))
-        let logotext = await textAppLogo.getText()
-        assert.strictEqual(logotext, &#x27;Swag Labs&#x27;)
+            <ul id="report"><li class="suite"><h1>Login &#x26; Sort</h1><ul><li class="test pass slow"><h2>Sort Z-A<span class="duration">98ms</span></h2><pre><code>async function(){ 
         //Urut produk Z-A
-        let sortProduct = await driver.findElement(By.css(&#x27;[data-test=&#x22;product-sort-container&#x22;]&#x27;))
         let sortText = await driver.findElement(By.css(&#x27;[value=&#x22;za&#x22;]&#x27;))
-        await sortProduct.click()
         await sortText.click()
         let textActiveOption = await driver.findElement(By.className(&#x27;active_option&#x27;))
         let optionText = await textActiveOption.getText()
-        assert.strictEqual(optionText, &#x27;Name (Z to A)&#x27;)
-        await driver.sleep(3000);
-        await driver.quit();
+        assert.strictEqual(optionText, &#x27;Name (Z to A)&#x27;)       
+    }</code></pre></li><li class="test pass slow"><h2>Sort Low-High<span class="duration">102ms</span></h2><pre><code>async function(){ 
+        //Urut produk Z-A
+        let sortText = await driver.findElement(By.css(&#x27;[value=&#x22;lohi&#x22;]&#x27;))
+        await sortText.click()
+        let textActiveOption = await driver.findElement(By.className(&#x27;active_option&#x27;))
+        let optionText = await textActiveOption.getText()
+        assert.strictEqual(optionText, &#x27;Price (low to high)&#x27;)       
     }</code></pre></li></ul></li></ul>
         </div>
         <script>

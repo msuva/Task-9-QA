@@ -1,14 +1,14 @@
 {
   "stats": {
     "suites": 1,
-    "tests": 1,
-    "passes": 1,
+    "tests": 2,
+    "passes": 2,
     "pending": 0,
     "failures": 0,
-    "start": "2025-04-15T05:03:13.696Z",
-    "end": "2025-04-15T05:03:19.626Z",
-    "duration": 5930,
-    "testsRegistered": 1,
+    "start": "2025-04-15T13:44:18.816Z",
+    "end": "2025-04-15T13:44:28.761Z",
+    "duration": 9945,
+    "testsRegistered": 2,
     "passPercent": 100,
     "pendingPercent": 0,
     "other": 0,
@@ -18,7 +18,7 @@
   },
   "results": [
     {
-      "uuid": "76546d01-e6c4-415c-8a5d-288f977f2cc1",
+      "uuid": "27a7785b-1445-4707-8cb7-85cd5fd6a39b",
       "title": "",
       "fullFile": "C:\\Users\\User\\Desktop\\mochaweb\\tests\\test-sauce.js",
       "file": "\\tests\\test-sauce.js",
@@ -27,40 +27,97 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "9c267259-85ec-428e-8cd7-c5e9fcdbc4ee",
+          "uuid": "7c796850-6924-40cf-8353-97ddd4a9f2ab",
           "title": "Login & Sort",
           "fullFile": "C:\\Users\\User\\Desktop\\mochaweb\\tests\\test-sauce.js",
           "file": "\\tests\\test-sauce.js",
-          "beforeHooks": [],
-          "afterHooks": [],
+          "beforeHooks": [
+            {
+              "title": "\"before each\" hook in \"Login & Sort\"",
+              "fullTitle": "Login & Sort \"before each\" hook in \"Login & Sort\"",
+              "timedOut": false,
+              "duration": 2715,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "options = new chrome.Options();\n// options.addArguments(\"--headless\");\ndriver = await new Builder().forBrowser('chrome').setChromeOptions(options).build();\nawait driver.get('http://www.saucedemo.com');\nconst title = await driver.getTitle();\n\n//assert: memastikan object sama persis\nassert.strictEqual(title, 'Swag Labs');\n\n//input\nlet inputUsername= await driver.findElement(By.xpath('//*[@id=\"user-name\"]'))\nlet inputPassword = await driver.findElement(By.xpath('//*[@id=\"password\"]'))\nlet buttonLogin = await driver.findElement(By.xpath('//*[@id=\"login-button\"]'))\nawait inputUsername.sendKeys('standard_user')\nawait inputPassword.sendKeys('secret_sauce')\nawait buttonLogin.click()\n//assert: text dalam element benar\nlet textAppLogo = await driver.findElement(By.className('app_logo'))\nlet logotext = await textAppLogo.getText()\nlet sortProduct = await driver.findElement(By.css('[data-test=\"product-sort-container\"]'))\nassert.strictEqual(logotext, 'Swag Labs')       \nawait sortProduct.click()",
+              "err": {},
+              "uuid": "38e4e844-35e4-4d3b-aae7-c2d1c9309f07",
+              "parentUUID": "7c796850-6924-40cf-8353-97ddd4a9f2ab",
+              "isHook": true,
+              "skipped": false
+            }
+          ],
+          "afterHooks": [
+            {
+              "title": "\"after each\" hook in \"Login & Sort\"",
+              "fullTitle": "Login & Sort \"after each\" hook in \"Login & Sort\"",
+              "timedOut": false,
+              "duration": 2114,
+              "state": null,
+              "speed": null,
+              "pass": false,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "await driver.sleep(2000);\nawait driver.quit();",
+              "err": {},
+              "uuid": "fba82e75-bca8-40ed-8235-75ebb0be5a2c",
+              "parentUUID": "7c796850-6924-40cf-8353-97ddd4a9f2ab",
+              "isHook": true,
+              "skipped": false
+            }
+          ],
           "tests": [
             {
-              "title": "Sukses Login",
-              "fullTitle": "Login & Sort Sukses Login",
+              "title": "Sort Z-A",
+              "fullTitle": "Login & Sort Sort Z-A",
               "timedOut": false,
-              "duration": 5922,
+              "duration": 93,
               "state": "passed",
               "speed": "slow",
               "pass": true,
               "fail": false,
               "pending": false,
               "context": null,
-              "code": "driver = await new Builder().forBrowser('chrome').build();\nawait driver.get('http://www.saucedemo.com');\nconst title = await driver.getTitle();\n\n//assert: memastikan object sama persis\nassert.strictEqual(title, 'Swag Labs');\n\n//input\nlet inputUsername = await driver.findElement(By.xpath('//*[@id=\"user-name\"]'))\nlet inputPassword = await driver.findElement(By.xpath('//*[@id=\"password\"]'))\nlet buttonLogin = await driver.findElement(By.xpath('//*[@id=\"login-button\"]'))\nawait inputUsername.sendKeys('standard_user')\nawait inputPassword.sendKeys('secret_sauce')\nawait buttonLogin.click()\n//assert: text dalam element benar\nlet textAppLogo = await driver.findElement(By.className('app_logo'))\nlet logotext = await textAppLogo.getText()\nassert.strictEqual(logotext, 'Swag Labs')\n//Urut produk Z-A\nlet sortProduct = await driver.findElement(By.css('[data-test=\"product-sort-container\"]'))\nlet sortText = await driver.findElement(By.css('[value=\"za\"]'))\nawait sortProduct.click()\nawait sortText.click()\nlet textActiveOption = await driver.findElement(By.className('active_option'))\nlet optionText = await textActiveOption.getText()\nassert.strictEqual(optionText, 'Name (Z to A)')\nawait driver.sleep(3000);\nawait driver.quit();",
+              "code": "//Urut produk Z-A\nlet sortText = await driver.findElement(By.css('[value=\"za\"]'))\nawait sortText.click()\nlet textActiveOption = await driver.findElement(By.className('active_option'))\nlet optionText = await textActiveOption.getText()\nassert.strictEqual(optionText, 'Name (Z to A)')",
               "err": {},
-              "uuid": "5f0b3db6-d653-407c-8074-41ac890e678e",
-              "parentUUID": "9c267259-85ec-428e-8cd7-c5e9fcdbc4ee",
+              "uuid": "14b3dc3a-57fa-48dc-99cd-66ec89052dce",
+              "parentUUID": "7c796850-6924-40cf-8353-97ddd4a9f2ab",
+              "isHook": false,
+              "skipped": false
+            },
+            {
+              "title": "Sort Low-High",
+              "fullTitle": "Login & Sort Sort Low-High",
+              "timedOut": false,
+              "duration": 83,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "//Urut produk Z-A\nlet sortText = await driver.findElement(By.css('[value=\"lohi\"]'))\nawait sortText.click()\nlet textActiveOption = await driver.findElement(By.className('active_option'))\nlet optionText = await textActiveOption.getText()\nassert.strictEqual(optionText, 'Price (low to high)')",
+              "err": {},
+              "uuid": "9e0556f3-8384-4993-8346-28937c3689ad",
+              "parentUUID": "7c796850-6924-40cf-8353-97ddd4a9f2ab",
               "isHook": false,
               "skipped": false
             }
           ],
           "suites": [],
           "passes": [
-            "5f0b3db6-d653-407c-8074-41ac890e678e"
+            "14b3dc3a-57fa-48dc-99cd-66ec89052dce",
+            "9e0556f3-8384-4993-8346-28937c3689ad"
           ],
           "failures": [],
           "pending": [],
           "skipped": [],
-          "duration": 5922,
+          "duration": 176,
           "root": false,
           "rootEmpty": false,
           "_timeout": 60000
