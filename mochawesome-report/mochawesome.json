@@ -1,0 +1,100 @@
+{
+  "stats": {
+    "suites": 1,
+    "tests": 1,
+    "passes": 1,
+    "pending": 0,
+    "failures": 0,
+    "start": "2025-04-15T05:03:13.696Z",
+    "end": "2025-04-15T05:03:19.626Z",
+    "duration": 5930,
+    "testsRegistered": 1,
+    "passPercent": 100,
+    "pendingPercent": 0,
+    "other": 0,
+    "hasOther": false,
+    "skipped": 0,
+    "hasSkipped": false
+  },
+  "results": [
+    {
+      "uuid": "76546d01-e6c4-415c-8a5d-288f977f2cc1",
+      "title": "",
+      "fullFile": "C:\\Users\\User\\Desktop\\mochaweb\\tests\\test-sauce.js",
+      "file": "\\tests\\test-sauce.js",
+      "beforeHooks": [],
+      "afterHooks": [],
+      "tests": [],
+      "suites": [
+        {
+          "uuid": "9c267259-85ec-428e-8cd7-c5e9fcdbc4ee",
+          "title": "Login & Sort",
+          "fullFile": "C:\\Users\\User\\Desktop\\mochaweb\\tests\\test-sauce.js",
+          "file": "\\tests\\test-sauce.js",
+          "beforeHooks": [],
+          "afterHooks": [],
+          "tests": [
+            {
+              "title": "Sukses Login",
+              "fullTitle": "Login & Sort Sukses Login",
+              "timedOut": false,
+              "duration": 5922,
+              "state": "passed",
+              "speed": "slow",
+              "pass": true,
+              "fail": false,
+              "pending": false,
+              "context": null,
+              "code": "driver = await new Builder().forBrowser('chrome').build();\nawait driver.get('http://www.saucedemo.com');\nconst title = await driver.getTitle();\n\n//assert: memastikan object sama persis\nassert.strictEqual(title, 'Swag Labs');\n\n//input\nlet inputUsername = await driver.findElement(By.xpath('//*[@id=\"user-name\"]'))\nlet inputPassword = await driver.findElement(By.xpath('//*[@id=\"password\"]'))\nlet buttonLogin = await driver.findElement(By.xpath('//*[@id=\"login-button\"]'))\nawait inputUsername.sendKeys('standard_user')\nawait inputPassword.sendKeys('secret_sauce')\nawait buttonLogin.click()\n//assert: text dalam element benar\nlet textAppLogo = await driver.findElement(By.className('app_logo'))\nlet logotext = await textAppLogo.getText()\nassert.strictEqual(logotext, 'Swag Labs')\n//Urut produk Z-A\nlet sortProduct = await driver.findElement(By.css('[data-test=\"product-sort-container\"]'))\nlet sortText = await driver.findElement(By.css('[value=\"za\"]'))\nawait sortProduct.click()\nawait sortText.click()\nlet textActiveOption = await driver.findElement(By.className('active_option'))\nlet optionText = await textActiveOption.getText()\nassert.strictEqual(optionText, 'Name (Z to A)')\nawait driver.sleep(3000);\nawait driver.quit();",
+              "err": {},
+              "uuid": "5f0b3db6-d653-407c-8074-41ac890e678e",
+              "parentUUID": "9c267259-85ec-428e-8cd7-c5e9fcdbc4ee",
+              "isHook": false,
+              "skipped": false
+            }
+          ],
+          "suites": [],
+          "passes": [
+            "5f0b3db6-d653-407c-8074-41ac890e678e"
+          ],
+          "failures": [],
+          "pending": [],
+          "skipped": [],
+          "duration": 5922,
+          "root": false,
+          "rootEmpty": false,
+          "_timeout": 60000
+        }
+      ],
+      "passes": [],
+      "failures": [],
+      "pending": [],
+      "skipped": [],
+      "duration": 0,
+      "root": true,
+      "rootEmpty": true,
+      "_timeout": 60000
+    }
+  ],
+  "meta": {
+    "mocha": {
+      "version": "10.8.2"
+    },
+    "mochawesome": {
+      "options": {
+        "quiet": false,
+        "reportFilename": "mochawesome",
+        "saveHtml": true,
+        "saveJson": true,
+        "consoleReporter": "spec",
+        "useInlineDiffs": false,
+        "code": true
+      },
+      "version": "7.1.3"
+    },
+    "marge": {
+      "options": null,
+      "version": "6.2.0"
+    }
+  }
+}
