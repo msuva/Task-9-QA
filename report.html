@@ -556,17 +556,39 @@ body {
                     <li class="passes">passes: <em>2</em></li>
                     <li class="pending">pending: <em>0</em></li>
                     <li class="failures">failures: <em>0</em></li>
-                    <li class="duration">duration: <em>9.6s</em></li>
+                    <li class="duration">duration: <em>33.2s</em></li>
                 </ul>
             </div>
-            <ul id="report"><li class="suite"><h1>Login &#x26; Sort</h1><ul><li class="test pass slow"><h2>Sort Z-A<span class="duration">98ms</span></h2><pre><code>async function(){ 
+            <ul id="report"><li class="suite"><h1>Login &#x26; Sort</h1><ul><li class="test pass slow"><h2>Sort Z-A<span class="duration">642ms</span></h2><pre><code>async function(){ 
         //Urut produk Z-A
         let sortText = await driver.findElement(By.css(&#x27;[value=&#x22;za&#x22;]&#x27;))
         await sortText.click()
         let textActiveOption = await driver.findElement(By.className(&#x27;active_option&#x27;))
         let optionText = await textActiveOption.getText()
-        assert.strictEqual(optionText, &#x27;Name (Z to A)&#x27;)       
-    }</code></pre></li><li class="test pass slow"><h2>Sort Low-High<span class="duration">102ms</span></h2><pre><code>async function(){ 
+        assert.strictEqual(optionText, &#x27;Name (Z to A)&#x27;) 
+        
+        //screenshot keadaan layar sekarang ke current.png
+        let screenshot = await driver.takeScreenshot();
+        let imgBuffer = Buffer.from(screenshot, &#x22;base64&#x22;);
+        fs.writeFileSync(&#x22;current.png&#x22;, imgBuffer);
+        //ambil baseline untuk compare, jika belum ada maka current.png dijadikan baseline
+        if(!fs.existsSync(&#x22;baseline.png&#x22;)){
+            fs.copyFileSync(&#x22;current.png&#x22;, &#x22;baseline.png&#x22;);
+            console.log(&#x22;Baseline image saved&#x22;);
+        }
+        //compare baseline.png dengan current.png
+        let img1 = PNG.sync.read(fs.readFileSync(&#x22;baseline.png&#x22;));
+        let img2 = PNG.sync.read(fs.readFileSync(&#x22;current.png&#x22;));
+        let { width, height } = img1;
+        let diff = new PNG({ width, height});
+        let numDiffPixels = pixelmatch(img1.data, img2.data, diff.data, width, height, { threshold: 0.1});
+        fs.writeFileSync(&#x22;diff.png&#x22;, PNG.sync.write(diff));
+        if(numDiffPixels &#x3E; 0){
+            console.log(&#x60;Visual difference found, different: ${numDiffPixels}&#x60;);
+        }else{
+            console.log(&#x22;No visual difference found.&#x22;);
+        }      
+    }</code></pre></li><li class="test pass slow"><h2>Sort Low-High<span class="duration">94ms</span></h2><pre><code>async function(){ 
         //Urut produk Z-A
         let sortText = await driver.findElement(By.css(&#x27;[value=&#x22;lohi&#x22;]&#x27;))
         await sortText.click()
